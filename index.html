@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=IM+Fell+Great+Primer:ital@0;1&family=Jockey+One&family=Krona+One&family=Special+Gothic+Condensed+One&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=IM+Fell+Great+Primer:ital@0;1&family=Jockey+One&family=Krona+One&family=Special+Gothic+Condensed+One&family=Teko:wght@300..700&display=swap"
+        rel="stylesheet">
     <style>
         body,
         html {
@@ -185,11 +187,11 @@
         }
 
         .closing {
-            animation: fade-out 0.5s ease-in-out forwards;
+            animation: fade-out 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .showing {
-            animation: fade-in 0.5s ease-in-out forwards;
+            animation: fade-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .d-none {
@@ -230,6 +232,7 @@
             position: absolute;
             bottom: 1em;
             left: 50%;
+            transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         #view-more:hover {
@@ -237,14 +240,13 @@
         }
 
         .card {
-            border: 1px solid #ccc;
             background-color: #ccc;
             color: black;
             border-radius: 5px;
-            padding: 10px;
             margin: 10px;
-            width: 300px;
-            box-shadow: 0px 6px 16px 0px rgba(0,0,0,0.75);
+            width: 30em;
+            box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.75);
+            padding: 0;
         }
 
         .card-title {
@@ -252,25 +254,36 @@
             font-family: "Special Gothic Condensed One", sans-serif;
             font-weight: bolder;
         }
+
         .card-header {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+            margin-left: 10px;
+            margin-right: 10px;
         }
+
         .card-content {
             font-size: 1em;
             margin-bottom: .2em;
             margin-top: .9em;
             font-family: "Teko", sans-serif;
+            margin-left: 10px;
+            margin-right: 10px;
         }
+
         .card-content p {
             margin-top: 0;
         }
+
         .card-footer {
             display: flex;
             justify-content: space-between;
             gap: .5em;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
 
         .card-footer .btn {
@@ -284,10 +297,15 @@
             border-radius: 5px;
             cursor: pointer;
             flex: 1;
+            user-select: none;
         }
 
-        .card-footer.btn:hover {
+        .card-footer .btn:hover {
             background-color: #0056b3;
+        }
+
+        .card-footer .btn:active {
+            background-color: #003f83;
         }
 
         .marquee {
@@ -295,6 +313,9 @@
             overflow: hidden;
             position: relative;
             width: 100%;
+            background-color: #202020;
+            color: #BCBCBC;
+            margin-bottom: 10px;
         }
 
         .marquee h3 {
@@ -316,7 +337,9 @@
         .wishlist-now {
             margin-top: 0;
             margin-bottom: 0;
+            font-family: "Special Gothic Condensed One", sans-serif;
         }
+
         .coming-soon {
             padding: .1em .3em .1em .3em;
             border-radius: 1em;
@@ -324,6 +347,7 @@
             margin-top: 0;
             margin-bottom: 0;
         }
+
         .blinking-ry {
             animation: blinking-ry 0.75s step-start infinite;
             color: #ff4c20;
@@ -335,6 +359,71 @@
                 color: #D6D6D6;
                 background-color: #ff4c20;
             }
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .toast {
+            font-family: "Jockey One", sans-serif;
+            background: linear-gradient(to bottom, #5e2a84, #3d1e57);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: none;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border: 2px solid #793aa8;
+            letter-spacing: 1px;
+            font-size: 1.5em;
+        }
+
+        .toast.toast-show {
+            display: block;
+            opacity: 1;
+            animation: fade-in-top 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes fade-in-top {
+            0% {
+                opacity: 0;
+                scale: .9;
+                transform: translateY(-2em);
+            }
+
+            100% {
+                opacity: 1;
+                scale: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toast.toast-hiding {
+            animation: fade-out-bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes fade-out-bottom {
+            0% {
+                opacity: 1;
+                scale: 1;
+            }
+
+            100% {
+                opacity: 0;
+                scale: .8;
+            }
+        }
+
+        .toast-message {
+            margin: 0;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -391,20 +480,20 @@
         <div class="showcase d-none">
             <h1 class="h1">My Games</h1>
             <div class="card">
+                <div class="marquee">
+                    <h3 class="wishlist-now">WISHLIST NOW!</h3>
+                </div>
                 <div class="card-header">
                     <span class="card-title">Call Of Skibidi</span>
                     <p class="blinking-ry coming-soon">Coming soon!</p>
                 </div>
                 <div class="card-content">
                     <p>Fight against the skibidi toilets! Your goal is to <b>S U R V I V E</b></p>
-                    <div class="marquee">
-                        <h3 class="wishlist-now">WISHLIST NOW!</h3>
-                    </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn">Yes</button>
-                    <button class="btn">Sure</button>
-                    <button class="btn">Absolutely</button>
+                    <button class="btn" onclick="showToast('Thanks!')">Sure</button>
+                    <button class="btn" onclick="showToast('I appreciate it!')">Yes</button>
+                    <button class="btn" onclick="showToast('Amazing!')">Absolutely</button>
                 </div>
             </div>
         </div>
@@ -414,12 +503,17 @@
                     d="m8 10.207l3.854-3.853l-.707-.708L8 8.793L4.854 5.646l-.708.708z" clip-rule="evenodd" />
             </svg>
         </a>
+        <div id="toast-container" class="toast-container">
+            <div id="toast" class="toast">
+                <p id="toast-message" class="toast-message">Hello world!</p>
+            </div>
+        </div>
     </div>
     <script>
         const arrow = document.getElementById('view-more');
         const intro = document.querySelector('.intro');
         const showcase = document.querySelector('.showcase');
-
+        let timeout = 0;
         let showcaseShowing = false;
 
         arrow.addEventListener('click', (e) => {
@@ -448,6 +542,25 @@
                 }
             }
         });
+
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
+            clearTimeout(timeout);
+            toastMessage.textContent = message;
+            toast.classList.remove('toast-hiding');
+            toast.classList.add('toast-show');
+
+            timeout = setTimeout(() => {
+                toast.classList.add('toast-hiding');
+                toast.onanimationend = () => {
+                    toast.classList.remove('toast-show');
+                    toast.classList.remove('toast-hiding');
+                    toast.onanimationend = null;
+                }
+            }, duration);
+        }
     </script>
 </body>
 
