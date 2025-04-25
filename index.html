@@ -125,58 +125,6 @@
             transition: font-size 1s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        @media (max-width: 768px) {
-            .h1 {
-                font-size: 3em;
-            }
-
-            .h5 {
-                font-size: 0.9em;
-            }
-
-            .app {
-                padding: 0.5em;
-            }
-
-            .top {
-                flex-direction: row;
-                gap: 0.7em;
-            }
-
-            .icon {
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        @media (min-width: 2560px) {
-            .h1 {
-                font-size: 9em;
-            }
-
-            .h5 {
-                font-size: 2em;
-            }
-
-            .icon {
-                width: 40px;
-                height: 40px;
-                scale: 2;
-            }
-
-            .icon:hover {
-                scale: 2.1;
-            }
-
-            .icon:active {
-                scale: 1.9;
-            }
-
-            .app {
-                padding: 2em;
-            }
-        }
-
         .intro,
         .showcase {
             display: flex;
@@ -237,10 +185,13 @@
         }
 
         #view-more:hover {
-            transform: translateY(-0.3em);
+            transform: translateY(-0.2em);
         }
-        
-        
+
+        #view-more:active {
+            transform: translateY(-0.1em);
+        }
+
         .card {
             background-color: #ccc;
             color: black;
@@ -450,9 +401,11 @@
             align-items: center;
             z-index: 1000;
         }
+
         .dialog-open {
             backdrop-filter: blur(5px);
         }
+
         .dialog-content {
             background-color: #fefefe;
             margin: 10% auto;
@@ -504,6 +457,68 @@
             width: 100%;
             height: 100%;
         }
+
+        /* Mobile phones */
+        @media (max-width: 768px) {
+            .h1 {
+                font-size: 3em;
+            }
+
+            .h5 {
+                font-size: 0.9em;
+            }
+
+            .app {
+                padding: 0.5em;
+            }
+
+            .top {
+                flex-direction: row;
+                gap: 0.7em;
+            }
+
+            .icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            #view-more {
+                scale: 2;
+            }
+
+            .card {
+                width: 25em;
+            }
+        }
+
+        /* HDPI screens (4k) */
+        @media (min-width: 2560px) {
+            .h1 {
+                font-size: 9em;
+            }
+
+            .h5 {
+                font-size: 2em;
+            }
+
+            .icon {
+                width: 40px;
+                height: 40px;
+                scale: 2;
+            }
+
+            .icon:hover {
+                scale: 2.1;
+            }
+
+            .icon:active {
+                scale: 1.9;
+            }
+
+            .app {
+                padding: 2em;
+            }
+        }
     </style>
 </head>
 
@@ -553,7 +568,7 @@
                 <span class="shine-wrapper">
                     <h1 class="h1 page-centered shine">Datazilla</h1>
                 </span>
-                <h5 class="h5 center">I MAKE GAMES :)</h5>
+                <h5 class="h5 center">Just a gamedev 😁</h5>
             </div>
         </div>
         <div class="showcase d-none">
@@ -570,9 +585,9 @@
                     <p>Fight against the skibidi toilets! Your goal is to <b>S U R V I V E</b></p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn" onclick="showToast('Thanks!')">Sure</button>
-                    <button class="btn" onclick="showToast('I appreciate it!')">Yes</button>
-                    <button class="btn" onclick="showToast('Amazing!')">Absolutely</button>
+                    <button class="btn" onclick="showToast('Thanks for buying!')"><b>Nope</b></button>
+                    <button class="btn" onclick="showToast('Your order has been placed!')">No thanks</button>
+                    <button class="btn" onclick="showToast('Added to cart!')">No way</button>
                 </div>
             </div>
         </div>
@@ -602,7 +617,8 @@
                     </div>
                     <div class="dialog-body">
                         <ul>
-                            <li>Icons from <a href="https://icon-sets.iconify.design/">https://icon-sets.iconify.design/</a></li>
+                            <li>Icons from <a
+                                    href="https://icon-sets.iconify.design/">https://icon-sets.iconify.design/</a></li>
                         </ul>
                     </div>
                 </div>
@@ -682,6 +698,22 @@
                 creditsDialog.onanimationend = null;
                 dialogWrapper.classList.remove('dialog-open');
             }
+        });
+
+        function onHoverChangeText(elem, text) {
+            let originalText = elem.textContent;
+            elem.addEventListener('mouseover', () => {
+                elem.textContent = text;
+            });
+
+            elem.addEventListener('mouseout', () => {
+                elem.textContent = originalText;
+            });
+        }
+
+        let btns = document.querySelectorAll(".card-footer .btn");
+        btns.forEach((btn) => {
+            onHoverChangeText(btn, 'ADD TO CART');
         });
     </script>
 </body>
