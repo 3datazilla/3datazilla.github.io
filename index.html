@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Jockey+One&family=Jura:wght@300..700&family=Krona+One&family=Special+Gothic+Condensed+One&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Jockey+One&family=Jura:wght@300..700&family=Krona+One&family=Special+Gothic+Condensed+One&family=Teko:wght@300..700&display=swap"
+        rel="stylesheet">
     <style>
         body,
         html {
@@ -182,24 +184,85 @@
             bottom: 1em;
             left: 50%;
             transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1);
+            scale: 2;
+            /* Add animation */
+            animation: view-more-bounce 4s cubic-bezier(0.25, 1, 0.5, 1) 2s;
         }
 
-        #view-more:hover {
-            transform: translateY(-0.2em);
-        }
-
-        #view-more:active {
-            transform: translateY(-0.1em);
+        /* Bounce keyframes */
+        @keyframes view-more-bounce {
+            0%   { transform: translateY(0); }
+            10%  { transform: translateY(-5px); }
+            20%  { transform: translateY(0); }
+            30%  { transform: translateY(-7px); }
+            100% { transform: translateY(0); }
         }
 
         .card {
-            background-color: #ccc;
-            color: black;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #2d003e 0%, #3d1e57 100%);
+            color: #D6D6D6;
+            border-radius: 12px;
             margin: 10px;
             width: 30em;
-            box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 8px 24px 0px rgba(70, 0, 113, 0.25), 0 1.5px 0 #793aa8 inset;
             padding: 0;
+            border: 1.5px solid #793aa8;
+            transition: box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .showcase h1 {
+            font-size: 3.6em;
+            color: #D6D6D6;
+            margin-bottom: .5em;
+            letter-spacing: 0.03em;
+            text-shadow: 0 2px 16px #793aa8cc, 0 1px 0 #202020;
+        }
+
+        .card-footer .btn {
+            font-family: "Special Gothic Condensed One", sans-serif;
+            font-size: 1.25em;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, #793aa8 0%, #5e2a84 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            flex: 1;
+            user-select: none;
+            box-shadow: 0 2px 8px #793aa855;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .card-footer .btn::before {
+            content: "";
+            position: absolute;
+            left: -75%;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.02) 100%);
+            transform: skewX(-20deg);
+            transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+        }
+
+        .card-footer .btn:hover {
+            background: linear-gradient(90deg, #a86adf 0%, #793aa8 100%);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 16px #a86adfaa, 0 1.5px 0 #fff2 inset;
+        }
+
+        .card-footer .btn:hover::before {
+            left: 120%;
+        }
+
+        .card-footer .btn:active {
+            background: linear-gradient(90deg, #5e2a84 0%, #793aa8 100%);
+            transform: scale(0.97);
+            box-shadow: 0 1px 4px #793aa855;
         }
 
         .card-title {
@@ -269,7 +332,7 @@
             background-color: #202020;
             color: #BCBCBC;
             margin-bottom: 10px;
-            border-radius: 4px 4px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
         .marquee h3 {
@@ -297,22 +360,22 @@
 
         .coming-soon {
             padding: .1em .3em .1em .3em;
-            border-radius: 1em;
-            font-family: "Atma", system-ui;
+            border-radius: 10px;
+            font-family: "Special Gothic Condensed One", sans-serif;
             margin-top: 0;
             margin-bottom: 0;
         }
 
         .blinking-ry {
             animation: blinking-ry 0.75s step-start infinite;
-            color: #ff4c20;
+            color: #9b20ff;
             background-color: #D6D6D6;
         }
 
         @keyframes blinking-ry {
             50% {
                 color: #D6D6D6;
-                background-color: #ff4c20;
+                background-color: #9b20ff;
             }
         }
 
@@ -385,6 +448,8 @@
             position: absolute;
             bottom: 1em;
             left: 1em;
+            z-index: 10;
+            transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .dialog {
@@ -482,12 +547,13 @@
                 height: 20px;
             }
 
-            #view-more {
-                scale: 2;
-            }
-
             .card {
                 width: 25em;
+            }
+
+            .bottom-left {
+                bottom: 0.5em;
+                left: 0.5em;
             }
         }
 
@@ -517,6 +583,11 @@
 
             .app {
                 padding: 2em;
+            }
+
+            .bottom-left {
+                bottom: 2em;
+                left: 3em;
             }
         }
     </style>
@@ -585,9 +656,9 @@
                     <p>Fight against the skibidi toilets! Your goal is to <b>S U R V I V E</b></p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn" onclick="showToast('Thanks for buying!')"><b>Nope</b></button>
-                    <button class="btn" onclick="showToast('Your order has been placed!')">No thanks</button>
-                    <button class="btn" onclick="showToast('Added to cart!')">No way</button>
+                    <button class="btn" onclick="showToast('Awesum :D')"><b>Nope</b></button>
+                    <button class="btn" onclick="showToast('thx bro 😁')">No thanks</button>
+                    <button class="btn" onclick="showToast('Added to cart 😎')">No way</button>
                 </div>
             </div>
         </div>
@@ -632,6 +703,24 @@
         let timeout = 0;
         let showcaseShowing = false;
 
+        // Bounce animation logic
+        let bounceInterval = null;
+        let bounceStopped = false;
+        function startBounceAnimation() {
+            if (bounceStopped) return;
+            arrow.style.animation = 'view-more-bounce 1s cubic-bezier(0.25, 1, 0.5, 1)';
+            arrow.style.animationIterationCount = '1';
+            arrow.style.animationFillMode = 'both';
+            setTimeout(() => {
+                arrow.style.animation = '';
+            }, 1000);
+        }
+        // Start initial bounce after 3s, then every 6s
+        let bounceTimeout = setTimeout(() => {
+            startBounceAnimation();
+            bounceInterval = setInterval(startBounceAnimation, 6000);
+        }, 3000);
+
         arrow.addEventListener('click', (e) => {
             if (!showcaseShowing) {
                 intro.classList.remove('showing');
@@ -657,6 +746,11 @@
                     showcaseShowing = false;
                 }
             }
+            // Stop bounce animation on click
+            bounceStopped = true;
+            clearTimeout(bounceTimeout);
+            clearInterval(bounceInterval);
+            arrow.style.animation = '';
         });
 
         function showToast(message, duration = 3000) {
